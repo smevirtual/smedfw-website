@@ -10,7 +10,9 @@
   <meta name="google" content="nositelinkssearchbox">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <title>SME DFW Chapter | Homepage</title>
-  <link href="styles.css" rel="stylesheet">
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
 </head>
 <body>
 <!-- TODO: Add content here. -->

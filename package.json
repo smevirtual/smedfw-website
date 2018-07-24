@@ -4,7 +4,7 @@
   "description": "Official homepage for SME DFW (Dallas-Fort Worth) Chapter at smedfw.com.",
   "private": true,
   "license": "MIT",
-  "homepage": "http://www.smedfw.com/",
+  "homepage": "https://www.smedfw.com/",
   "author": "SME DFW Chapter Contributors <open@smedfw.com>",
   "repository": {
     "type": "git",
@@ -14,11 +14,12 @@
     "url": "https://github.com/smedfw/website/issues"
   },
   "scripts": {
-    "build": "gulp build",
+    "build:dev": "gulp build",
+    "build:prod": "cross-env NODE_ENV=production gulp build",
+    "clean": "gulp clean",
     "commitmsg": "commitlint -E GIT_PARAMS",
-    "lint": "",
-    "watch": "gulp build && gulp watch",
-    "test": ""
+    "serve:dev": "gulp serve",
+    "serve:prod": "cross-env NODE_ENV=production gulp build && http-server ./dist"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
@@ -32,6 +33,9 @@
     "@commitlint/config-conventional": "^7.0.1",
     "autoprefixer": "^8.6.2",
     "babel-eslint": "^8.2.5",
+    "browser-sync": "^2.24.5",
+    "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
     "cz-conventional-changelog": "^2.1.0",
     "del": "^3.0.0",
     "eslint": "^4.19.1",
@@ -47,8 +51,26 @@
     "gulp-sass": "^4.0.1",
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
+    "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
-    "husky": "^0.14.3"
+    "husky": "^0.14.3",
+    "prettier": "^1.13.7",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "stylelint": "^9.3.0",
+    "stylelint-config-prettier": "^3.3.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^0.8.1",
+    "stylelint-scss": "^3.2.0",
+    "tslint": "^5.10.0",
+    "ts-loader": "^4.4.2",
+    "ts-node": "^7.0.0",
+    "tslint-microsoft-contrib": "^5.0.3",
+    "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "4.12.1",
+    "webpack-cli": "^3.0.8"
   },
   "engines": {
     "node": ">=8.x"
