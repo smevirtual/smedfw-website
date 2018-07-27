@@ -15,3 +15,15 @@ Manufacturing Engineers). Read more about SME at [sme.org](http://www.sme.org/).
 
 All of the code in this repository is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 A copy of this license is included in the root of this repository.
+
+### SME Logos and Branding
+
+While this project is permissively licensed, the [SME](http://www.sme.org/) logos
+and brands which are part of this codebase are not. SME logo and brand usage
+is only allowed by the SME and authorized parties connected to the SME (e.g.
+like regional chapters).
+
+If you fork this project for use by your own website or web application, you
+must not use SME logos or brands inappropriately. Please see the
+[SME Branding Guidelines](http://www.sme.org/sme-logo/) for when a SME logo
+can be used and what conditions are attached to SME logos and brands.
