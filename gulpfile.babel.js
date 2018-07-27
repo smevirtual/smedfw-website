@@ -39,10 +39,10 @@ gulp.task("bundle", callback => {
 });
 
 /**
- * COPY IMAGES TASK
+ * COPY TASK
  * -----------------------------------------------------------------------------
  */
-gulp.task("images-copy", () => gulp.src("src/images/**/*").pipe(gulp.dest("dist")));
+gulp.task("copy", () => gulp.src(["src/images/**/*", "src/*.txt"]).pipe(gulp.dest("dist")));
 
 /**
  * CLEAN TASK
@@ -62,14 +62,14 @@ gulp.task("dev-server", () => {
       baseDir: "./dist"
     }
   });
-  gulp.watch("./src/**/*", gulp.series("bundle"));
+  gulp.watch("./src/**/*", gulp.series("copy", "bundle"));
 });
 
 /**
  * BUILD TASK
  * -----------------------------------------------------------------------------
  */
-gulp.task("build", gulp.series("clean", "images-copy", "bundle"));
+gulp.task("build", gulp.series("clean", "copy", "bundle"));
 
 /**
  * LOCAL SERVER RUN TASK

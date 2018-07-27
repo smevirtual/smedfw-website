@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>SME DFW Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#F5F5F5" x="0" y="0" width="200" height="200"></rect>
+        <text id="SME" font-family="Roboto-Bold, Roboto" font-size="36" font-weight="bold" fill="#0C3352">
+            <tspan x="15" y="48">SME</tspan>
+        </text>
+        <text id="Dallas" font-family="Roboto-Medium, Roboto" font-size="20" font-weight="400" fill="#5C8BB6">
+            <tspan x="15" y="73">Dallas</tspan>
+        </text>
+        <text id="Fort-Worth" font-family="Roboto-Medium, Roboto" font-size="20" font-weight="400" fill="#5C8BB6">
+            <tspan x="15" y="95">Fort Worth</tspan>
+        </text>
+    </g>
+</svg>
