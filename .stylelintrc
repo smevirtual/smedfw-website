@@ -30,7 +30,6 @@
     "media-feature-range-operator-space-before": "never",
     "no-descending-specificity": null,
     "no-duplicate-selectors": true,
-    "number-leading-zero": "never",
     "media-feature-name-no-unknown": [true, {
       "ignoreMediaFeatureNames": ["prefers-reduced-motion"]
     }],

@@ -18,7 +18,9 @@
     "build:prod": "cross-env NODE_ENV=production gulp build",
     "clean": "gulp clean",
     "commitmsg": "commitlint -E GIT_PARAMS",
+    "deploy": "cross-env NODE_ENV=production gulp build && firebase deploy",
     "serve:dev": "gulp serve",
+    "serve:firebase": "cross-env NODE_ENV=production gulp build && firebase serve --only hosting",
     "serve:prod": "cross-env NODE_ENV=production gulp build && http-server ./dist"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "@commitlint/config-conventional": "^7.0.1",
     "autoprefixer": "^8.6.2",
     "babel-eslint": "^8.2.5",
+    "bootstrap": "^4.1.3",
     "browser-sync": "^2.24.5",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
