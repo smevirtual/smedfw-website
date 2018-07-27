@@ -18,7 +18,9 @@
     "build:prod": "cross-env NODE_ENV=production gulp build",
     "clean": "gulp clean",
     "commitmsg": "commitlint -E GIT_PARAMS",
+    "deploy": "cross-env NODE_ENV=production gulp build && firebase deploy",
     "serve:dev": "gulp serve",
+    "serve:firebase": "cross-env NODE_ENV=production gulp build && firebase serve --only hosting",
     "serve:prod": "cross-env NODE_ENV=production gulp build && http-server ./dist"
   },
   "devDependencies": {
