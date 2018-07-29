@@ -11,6 +11,61 @@ collaborative opportunities.
 The SME DFW Chapter is a local chapter of SME (formerly the Society of
 Manufacturing Engineers). Read more about SME at [sme.org](http://www.sme.org/).
 
+### Development Prerequisites
+
+There are several prerequisites need to be installed on your development
+machine prior to working with this codebase.
+
+**Developers should use macOS or Linux to work with this codebase. Issues
+encountered using Windows are not considered bugs at this time.**
+
+1.  Install Node.js version 8.0 or greater.
+
+    See [this page](https://nodejs.org/en/download/).
+
+    For macOS development machines, installing Node.js with [Homebrew](https://brew.sh/)
+    is recommended.
+
+2.  Install Yarn.
+
+    See [this page](https://yarnpkg.com/en/docs/install).
+
+### Development Quick Start
+
+Once all of the above prerequisites are installed, the following commands are
+now available:
+
+| Command                   | Description                                                                                                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn run build:dev`      | Build project in development mode. Development mode artifacts that are generated are suitable for easier debugging.                                                                |
+| `yarn run build:prod`     | Build project in production mode. Production mode artifacts that are generated are suitable for deployment to Firebase Hosting (or any CDN).                                       |
+| `yarn run clean`          | Delete the `/dist` folder which holds the generated artifacts from the build process.                                                                                              |
+| `yarn run deploy`         | Build project artifacts in production mode and deploy to Firebase Hosting.                                                                                                         |
+| `yarn run serve:dev`      | Build project artifacts in development mode and run a development browser that will automatically refresh when source files are changed and saved.                                 |
+| `yarn run serve:firebase` | Build project artifacts in production mode and launch a local Firebase Hosting environment to verify how the project will look when deployed to a public Firebase Hosting project. |
+| `yarn run serve:prod`     | Build project artifacts in production mode and launch a basic, local HTTP server without automatic reloading.                                                                      |
+
+### Hosting Environment
+
+This project is set up to deploy to a [Firebase Hosting](https://firebase.google.com/docs/hosting/)
+environment. However, there is no reason that this project cannot be deployed to
+another hosting service of your choosing. If you choose another hosting service,
+delete the `.firebaserc` and `firebase.json` files in the root of the
+repository as they are only needed by Firebase.
+
+If you choose to use Firebase Hosting, then you must change the `smedfw-proj`
+key in `.firebaserc` to your Firebase project.
+
+### Community Participation Guidelines
+
+The SME DFW Chapter is committed to providing a friendly, safe and welcoming
+environment for all. Please take a moment to read our
+<a href="https://github.com/smedfw/community-guidelines/blob/master/README.md">Community Participation Guidelines</a>.
+
+### Contributing
+
+See the [Contributing Guidelines](.github/CONTRIBUTING.md) document.
+
 ### License
 
 All of the code in this repository is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
