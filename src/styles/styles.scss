@@ -40,6 +40,18 @@ $box-shadow-lg: none !default;
 // Custom Rules
 // ============
 
+.dfw-outdated-browser-banner {
+  background: #fffbdd;
+}
+
+// stylelint-disable declaration-no-important
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .dfw-outdated-browser-banner {
+    display: block !important;
+  }
+}
+// stylelint-enable declaration-no-important
+
 @include media-breakpoint-up(md) {
   .h-md-300 {
     height: 300px;
