@@ -4,6 +4,7 @@
  * =============================================================================
  */
 
+import autoprefixer from "autoprefixer";
 import path from "path";
 import log from "fancy-log";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
@@ -66,6 +67,16 @@ export default {
             loader: "css-loader",
             options: {
               minimize: true
+            }
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: () => [
+                autoprefixer({
+                  browsers: ["> 1%", "last 2 versions"]
+                })
+              ]
             }
           },
           "sass-loader?sourceMap"
