@@ -21,7 +21,12 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
 log.warn("[Gulp] build mode: ", IS_PRODUCTION ? "PRODUCTION" : "DEVELOPMENT");
 
 let suppressHugoErrors = false;
-const defaultHugoArgs = ["-d", "dist", "--config", "config.toml,financial_sponsors.toml,leadership_team.toml,hosting_sponsors.toml"];
+const defaultHugoArgs = [
+  "-d",
+  "dist",
+  "--config",
+  "config.toml,financial_sponsors.toml,leadership_team.toml,venue_sponsors.toml"
+];
 
 // Sitemaps need the absolute URL (along with the scheme) to be compatible with
 // major search engines. This changes the `baseURL` Hugo configuration setting
@@ -62,6 +67,12 @@ gulp.task("bundle", callback => {
 gulp.task("copy:images", () => gulp.src(["frontend/images/**/*"]).pipe(gulp.dest("dist")));
 
 /**
+ * COPY VIDEOS TASK
+ * -----------------------------------------------------------------------------
+ */
+gulp.task("copy:videos", () => gulp.src(["frontend/videos/**/*"]).pipe(gulp.dest("dist")));
+
+/**
  * COPY CONFIGS TASK
  * -----------------------------------------------------------------------------
  */
@@ -90,7 +101,7 @@ gulp.task("dev-server", () => {
     ["*.toml", "./archetypes/**/*", "./content/**/*", "./layouts/**/*"],
     gulp.series("hugo", "inject-favicon")
   );
-  gulp.watch(["./frontend/**/*"], gulp.series("bundle", "copy:images", "copy:configs"));
+  gulp.watch(["./frontend/**/*"], gulp.series("bundle", "copy:images", "copy:videos", "copy:configs"));
 });
 
 /**
@@ -108,7 +119,7 @@ gulp.task("generate-favicon", done => {
       design: {
         ios: {
           pictureAspect: "backgroundAndMargin",
-          backgroundColor: "#000000",
+          backgroundColor: "#25395e",
           margin: "0%",
           assets: {
             ios6AndPriorIcons: false,
@@ -121,7 +132,7 @@ gulp.task("generate-favicon", done => {
         desktopBrowser: {},
         windows: {
           pictureAspect: "noChange",
-          backgroundColor: "#000000",
+          backgroundColor: "#25395e",
           onConflict: "override",
           assets: {
             windows80Ie10Tile: false,
@@ -137,8 +148,8 @@ gulp.task("generate-favicon", done => {
         androidChrome: {
           pictureAspect: "backgroundAndMargin",
           margin: "0%",
-          backgroundColor: "#000000",
-          themeColor: "#000000",
+          backgroundColor: "#25395e",
+          themeColor: "#25395e",
           manifest: {
             name: "SME DFW Chapter",
             display: "browser",
@@ -153,7 +164,7 @@ gulp.task("generate-favicon", done => {
         },
         safariPinnedTab: {
           pictureAspect: "silhouette",
-          themeColor: "#000000"
+          themeColor: "#25395e"
         }
       },
       settings: {
@@ -230,7 +241,16 @@ gulp.task("hugo", done =>
  */
 gulp.task(
   "build",
-  gulp.series("clean", "generate-favicon", "bundle", "hugo", "copy:images", "copy:configs", "inject-favicon")
+  gulp.series(
+    "clean",
+    "generate-favicon",
+    "bundle",
+    "hugo",
+    "copy:images",
+    "copy:videos",
+    "copy:configs",
+    "inject-favicon"
+  )
 );
 
 /**

@@ -1,11 +1,13 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "SME DFW Chapter"
-disableKinds = ["taxonomy","taxonomyTerm"]
 publishDir = "dist"
 
 [sitemap]
-  changefreq = "monthly"
+  changefreq = "weekly"
+
+[taxonomies]
+  tag = "tags"
 
 [params]
     [params.seo]
@@ -18,6 +20,7 @@ publishDir = "dist"
 
     [params.external]
     feedback_form_url = "https://goo.gl/forms/qut4cYyM1LTPWleP2"
+    venue_sponsor_form_url = "https://goo.gl/forms/tWpYiXHm1wxH2JwS2"
     meetup_group_url = "https://www.meetup.com/smedfw"
     youtube_channel_url = "https://www.youtube.com/smevirtual"
     github_org_url = "https://github.com/smedfw"
