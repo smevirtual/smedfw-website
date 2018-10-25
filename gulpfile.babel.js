@@ -5,9 +5,12 @@
  */
 
 import BrowserSync from "browser-sync";
+import { spawn } from "child_process";
 import del from "del";
+import fs from "fs";
 import gulp from "gulp";
 import log from "fancy-log";
+import realFavicon from "gulp-real-favicon";
 import webpack from "webpack";
 import webpackConfig from "./webpack.config.babel";
 
@@ -17,6 +20,24 @@ const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 log.warn("[Gulp] build mode: ", IS_PRODUCTION ? "PRODUCTION" : "DEVELOPMENT");
 
+let suppressHugoErrors = false;
+const defaultHugoArgs = [
+  "-d",
+  "dist",
+  "--config",
+  "config.toml,financial_sponsors.toml,leadership_team.toml,venue_sponsors.toml"
+];
+
+// Sitemaps need the absolute URL (along with the scheme) to be compatible with
+// major search engines. This changes the `baseURL` Hugo configuration setting
+// prior to deployment.
+if (IS_PRODUCTION && process.env.DEPLOY_BASE_URL) {
+  defaultHugoArgs.push("-b");
+  defaultHugoArgs.push(process.env.DEPLOY_BASE_URL);
+}
+
+const FAVICON_DATA_FILE = "favicondata.json";
+
 /**
  * WEBPACK BUNDLE TASK
  * -----------------------------------------------------------------------------
@@ -24,7 +45,8 @@ log.warn("[Gulp] build mode: ", IS_PRODUCTION ? "PRODUCTION" : "DEVELOPMENT");
 gulp.task("bundle", callback => {
   webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
-      throw new log.error("webpack", err); // eslint-disable-line new-cap
+      log.error("Bundle error: ", err);
+      callback();
     }
     log.info("[Webpack] running...");
     log.info(
@@ -39,10 +61,22 @@ gulp.task("bundle", callback => {
 });
 
 /**
- * COPY TASK
+ * COPY IMAGES TASK
  * -----------------------------------------------------------------------------
  */
-gulp.task("copy", () => gulp.src(["src/images/**/*", "src/*.txt", "src/404.html"]).pipe(gulp.dest("dist")));
+gulp.task("copy:images", () => gulp.src(["frontend/images/**/*"]).pipe(gulp.dest("dist")));
+
+/**
+ * COPY VIDEOS TASK
+ * -----------------------------------------------------------------------------
+ */
+gulp.task("copy:videos", () => gulp.src(["frontend/videos/**/*"]).pipe(gulp.dest("dist")));
+
+/**
+ * COPY CONFIGS TASK
+ * -----------------------------------------------------------------------------
+ */
+gulp.task("copy:configs", () => gulp.src(["frontend/**/*.json"]).pipe(gulp.dest("dist")));
 
 /**
  * CLEAN TASK
@@ -57,19 +91,167 @@ gulp.task("clean", () => del(["dist/**/*"]));
  * changes and Browsersync will reload the browser as necessary.
  */
 gulp.task("dev-server", () => {
+  suppressHugoErrors = true;
   browserSync.init({
     server: {
       baseDir: "./dist"
     }
   });
-  gulp.watch("./src/**/*", gulp.series("copy", "bundle"));
+  gulp.watch(
+    ["*.toml", "./archetypes/**/*", "./content/**/*", "./layouts/**/*"],
+    gulp.series("hugo", "inject-favicon")
+  );
+  gulp.watch(["./frontend/**/*"], gulp.series("bundle", "copy:images", "copy:videos", "copy:configs"));
 });
+
+/**
+ * GENERATE FAVICONS TASK
+ * -----------------------------------------------------------------------------
+ * Generates all of the favicons and other icon assets from the master favicon
+ * image.
+ */
+gulp.task("generate-favicon", done => {
+  realFavicon.generateFavicon(
+    {
+      masterPicture: "./frontend/images/master-favicon-512.png",
+      dest: "./dist",
+      iconsPath: "/",
+      design: {
+        ios: {
+          pictureAspect: "backgroundAndMargin",
+          backgroundColor: "#25395e",
+          margin: "0%",
+          assets: {
+            ios6AndPriorIcons: false,
+            ios7AndLaterIcons: false,
+            precomposedIcons: false,
+            declareOnlyDefaultIcon: true
+          },
+          appName: "SME DFW Chapter"
+        },
+        desktopBrowser: {},
+        windows: {
+          pictureAspect: "noChange",
+          backgroundColor: "#25395e",
+          onConflict: "override",
+          assets: {
+            windows80Ie10Tile: false,
+            windows10Ie11EdgeTiles: {
+              small: false,
+              medium: true,
+              big: false,
+              rectangle: false
+            }
+          },
+          appName: "SME DFW Chapter"
+        },
+        androidChrome: {
+          pictureAspect: "backgroundAndMargin",
+          margin: "0%",
+          backgroundColor: "#25395e",
+          themeColor: "#25395e",
+          manifest: {
+            name: "SME DFW Chapter",
+            display: "browser",
+            orientation: "notSet",
+            onConflict: "override",
+            declared: true
+          },
+          assets: {
+            legacyIcon: false,
+            lowResolutionIcons: false
+          }
+        },
+        safariPinnedTab: {
+          pictureAspect: "silhouette",
+          themeColor: "#25395e"
+        }
+      },
+      settings: {
+        scalingAlgorithm: "Mitchell",
+        errorOnImageTooSmall: false,
+        readmeFile: false,
+        htmlCodeFile: false,
+        usePathAsIs: false
+      },
+      versioning: {
+        paramName: "v",
+        paramValue: "qABA4X8PYp"
+      },
+      markupFile: FAVICON_DATA_FILE
+    },
+    () => {
+      done();
+    }
+  );
+});
+
+/**
+ * INJECT FAVICONS TASK
+ * -----------------------------------------------------------------------------
+ * Injects the generated favicons and icon assets into the `index.html` file.
+ */
+gulp.task("inject-favicon", () =>
+  gulp
+    .src(["dist/*.html"])
+    .pipe(
+      realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code, {
+        keep: 'meta[property="og:image"]'
+      })
+    )
+    .pipe(gulp.dest("dist"))
+);
+
+/**
+ * CHECK FOR FAVICON STYLE/SETTING UPDATES TASK
+ * -----------------------------------------------------------------------------
+ * Run a check with the RealFaviconGenerator service (https://realfavicongenerator.net/)
+ * for potential updates for favicons. This is important because from time-to-time,
+ * device, platform and web browsers update their favicon and icon requirements.
+ */
+gulp.task("check-favicon-update", () => {
+  const currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
+  realFavicon.checkForUpdates(currentVersion, err => {
+    if (err) {
+      throw err;
+    }
+  });
+});
+
+/**
+ * HUGO BUILD TASK
+ * -----------------------------------------------------------------------------
+ * Builds the Hugo static site.
+ */
+gulp.task("hugo", done =>
+  spawn("hugo", defaultHugoArgs, { stdio: "inherit" }).on("close", code => {
+    if (suppressHugoErrors || code === 0) {
+      browserSync.reload();
+      done();
+    } else {
+      log.error("Hugo build task failed.");
+      done();
+    }
+  })
+);
 
 /**
  * BUILD TASK
  * -----------------------------------------------------------------------------
  */
-gulp.task("build", gulp.series("clean", "copy", "bundle"));
+gulp.task(
+  "build",
+  gulp.series(
+    "clean",
+    "generate-favicon",
+    "bundle",
+    "hugo",
+    "copy:images",
+    "copy:videos",
+    "copy:configs",
+    "inject-favicon"
+  )
+);
 
 /**
  * LOCAL SERVER RUN TASK

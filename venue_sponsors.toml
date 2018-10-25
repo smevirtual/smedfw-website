@@ -1,0 +1,5 @@
+[params]
+    [[params.venue_sponsors]]
+    name = "Advanced Graphics Systems"
+    url = "https://www.ags-am.com/"
+    logo_filename = "ags_logo.png"

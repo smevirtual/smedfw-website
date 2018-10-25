@@ -1,0 +1,29 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "SME DFW Chapter"
+publishDir = "dist"
+
+[sitemap]
+  changefreq = "weekly"
+
+[taxonomies]
+  tag = "tags"
+
+[params]
+    [params.seo]
+    description = "Official homepage for the SME DFW Chapter."
+    keywords = ["engineering","manufacturing","sme","smedfw","education"]
+
+    [params.social]
+    description = "SME DFW Chapter works to engage, educate and provide collaborative opportunities for manufacturing students and professionals in the Dallas-Fort Worth area."
+    twitter_handle="@smedfw"
+
+    [params.external]
+    feedback_form_url = "https://goo.gl/forms/qut4cYyM1LTPWleP2"
+    venue_sponsor_form_url = "https://goo.gl/forms/tWpYiXHm1wxH2JwS2"
+    meetup_group_url = "https://www.meetup.com/smedfw"
+    youtube_channel_url = "https://www.youtube.com/smevirtual"
+    github_org_url = "https://github.com/smedfw"
+    facebook_url = "https://www.facebook.com/smedfw"
+    linkedin_url = "https://www.linkedin.com/company/smedfw"
+    twitter_url = "https://twitter.com/smedfw"
