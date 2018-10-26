@@ -11,7 +11,7 @@ author_url: https://www.linkedin.com/in/adam-j-cook/
 author_title: Chief Technical Officer
 affiliation: Alliedstrand
 affiliation_url: https://alliedstrand.com/
-draft: false
+draft: true
 ---
 
 Ad elit do ex amet excepteur Lorem aute excepteur commodo voluptate non cillum sint. Aliquip quis elit nostrud eu qui minim qui. Aliquip anim quis enim velit ipsum nostrud occaecat deserunt dolore eiusmod pariatur reprehenderit excepteur. Ad irure qui laboris culpa ex voluptate cillum fugiat velit consectetur deserunt anim.
