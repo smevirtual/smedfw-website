@@ -10,9 +10,6 @@
     "noImplicitAny": false,
     "moduleResolution": "node",
     "preserveConstEnums": true,
-    "lib": [
-      "es2017",
-      "dom"
-    ]
+    "lib": ["es2017", "dom"]
   }
 }
