@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "SME DFW Chapter"
+title = "We have moved!"
 publishDir = "dist"
 
 [sitemap]
@@ -11,20 +11,12 @@ publishDir = "dist"
 
 [params]
     [params.seo]
-    description = "Official homepage for the SME DFW Chapter."
-    keywords = ["engineering","manufacturing","sme","smedfw","education"]
+    description = "SME DFW Chapter has moved!"
+    keywords = ["engineering","manufacturing","sme","smetexaplex","education"]
 
     [params.social]
-    description = "SME DFW Chapter works to engage, educate and provide collaborative opportunities for manufacturing students and professionals in the Dallas-Fort Worth area."
-    twitter_handle="@smedfw"
+    description = "The SME DFW Chapter is now the SME Texaplex Virtual Chapter."
+    twitter_handle="@smevirtual"
 
     [params.external]
-    feedback_form_url = "https://goo.gl/forms/qut4cYyM1LTPWleP2"
-    venue_sponsor_form_url = "https://goo.gl/forms/tWpYiXHm1wxH2JwS2"
-    meetup_group_url = "https://www.meetup.com/smedfw"
-    youtube_channel_url = "https://www.youtube.com/smevirtual"
-    subreddit_url = "https://www.reddit.com/r/smedfw"
-    github_org_url = "https://github.com/smedfw"
-    facebook_url = "https://www.facebook.com/smedfw"
-    linkedin_url = "https://www.linkedin.com/company/smedfw"
-    twitter_url = "https://twitter.com/smedfw"
+    smetexaplex_homepage_url = "https://smetexaplex.com"

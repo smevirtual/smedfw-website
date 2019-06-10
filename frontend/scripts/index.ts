@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 SME DFW Chapter Contributors. All Rights Reserved.
+ * Copyright 2019 SME Texaplex Virtual Chapter Contributors. All Rights Reserved.
  * See LICENSE in the repository root for license information.
  * =============================================================================
  */
