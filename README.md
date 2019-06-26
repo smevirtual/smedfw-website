@@ -4,9 +4,9 @@
 <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="The SME DFW Chapter website source is released under The MIT License." />
 </a>
 
-The SME DFW Chapter is now the SME Texaplex Virtual Chapter!
+The SME DFW Chapter has merged with the SME Virtual Network!
 
-Check out the [SME Texaplex Virtual Chapter website](https://smetexaplex.com/).
+Check out the [SME Virtual Network website](https://smevirtual.com/).
 
 ### License
 
