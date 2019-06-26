@@ -12,11 +12,11 @@ publishDir = "dist"
 [params]
     [params.seo]
     description = "SME DFW Chapter has moved!"
-    keywords = ["engineering","manufacturing","sme","smetexaplex","education"]
+    keywords = ["engineering","manufacturing","sme","smevirtual","education"]
 
     [params.social]
-    description = "The SME DFW Chapter is now the SME Texaplex Virtual Chapter."
+    description = "The SME DFW Chapter has merged with the SME Virtual Network."
     twitter_handle="@smevirtual"
 
     [params.external]
-    smetexaplex_homepage_url = "https://smetexaplex.com"
+    smevirtual_homepage_url = "https://smevirtual.com"
